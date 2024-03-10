@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Your Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+ 
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #eb4141;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .form {
+            max-width: 400px;
+            width: 100%;
+            background-color: #197c9b;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .form-control {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+        h3{
+            color: #e1e4e4;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+    <form method="post" class="form">
+        <h3>Edit Song Details</h3>
+        <label for="title" class="form-label">Title:
+            <input type="text" name="title" id="title" class="form-control" required />
+        </label>
+        <label for="genre" class="form-label">Genre:
+            <input type="text" name="genre" id="genre" class="form-control" required />
+        </label>
+        <label for="year" class="form-label">Year:
+            <input type="date" name="year" id="year" class="form-control" required />
+        </label>
+        <label for="duration" class="form-label">Duration:
+            <input type="time" name="duration" id="duration" class="form-control" required />
+        </label>
+        <input type="submit" value="Save" class="btn btn-success">
+    </form>
+    <a class="btn btn-primary" href="{{ url_for('creator') }}">GO Back</a>
+   
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Playlists</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #91aec2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+        }
+
+        .playlist-card {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .playlist-card:hover {
+            transform: scale(1.02);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .playlist-title {
+            color: #343a40;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .edit-btn,
+        .delete-btn {
+            color: #0c1014;
+            text-decoration: none;
+            margin-right: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .edit-btn:hover,
+        .delete-btn:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Playlists</h2>
+        <ul>
+            {% for playlist in playlists %}
+            <li>
+                <div class="playlist-card">
+                    <div class="card-body">
+                        <h3 class="playlist-title">
+                            <a href="{{ url_for('view_playlist', playlist_id=playlist.id) }}">{{ playlist.name }}</a>
+                        </h3>
+                        <a href="{{ url_for('edit_playlist', id=playlist.id) }}" class="edit-btn">Edit</a>
+                        <a href="{{ url_for('delete_playlist', id=playlist.id) }}" class="delete-btn btn btn-danger">Delete Playlist</a>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+        <a class="btn btn-primary" style="color: goldenrod; font-weight: bold; text-align: center;" href="{{url_for('play')}}">Go Back to Music Page</a>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes" style="color: red; border-width: 50px;">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+</body>
+
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Play Songs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <style>
+        body {
+            color: #2c3e50;
+            background: linear-gradient(to bottom right, #3498db, #2ecc71);
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .navbar {
+            background-color: #2980b9;
+            padding: 15px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            color: #0c596d;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .navbar-toggler-icon {
+            background-color: #ecf1ec;
+        }
+
+        .navbar-nav {
+            margin-right: auto;
+        }
+
+        .nav-item {
+            margin-right: 10px;
+        }
+
+        .nav-link {
+            color: #3198b2;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #3498db;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #e74c3c;
+            margin-top: 20px;
+        }
+
+        .table-container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ecf0f1;
+            overflow: hidden;
+            border-radius: 8px;
+            color: #2c3e50;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid #3498db;
+        }
+
+        th {
+            background-color: #2980b9;
+            color: white;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 5px;
+        }
+
+        .actions .btn {
+            margin-right: 5px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 8px 12px;
+            color: #ecf0f1;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-play {
+            background-color: #27ae60;
+        }
+
+        .btn-lyrics {
+            background-color: #3498db;
+        }
+        .btn:hover {
+            background-color: #34495e;
+        }
+
+        .search-box {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .search-input {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #3498db;
+            background-color: #a58c39;
+            color: #2c3e50;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #3498db;
+            color: #173d47;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .form-select {
+            margin: 10px;
+            margin-right: 50px;
+            width: 15%;
+        }
+
+        #search {
+            margin-left: 10px;
+            margin-right: 10px;
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">MelodyMingle</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <nav class="navbar">
+        <div class="container-fluid">
+            <form method="post", action="{{ url_for('search') }}">
+                <select name="input_type"  class="form-select">
+                    <option value="name">Name</option>
+                    <option value="song">Song</option>
+                    <option value="album">Album</option>
+                    <option value="genre">Genre</option>
+                    <option value="playlist">Playlist</option>
+                </select>
+                <input type="text" class="form-control" name="search">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </nav>
+    <h1>Play Songs</h1>
+        <h2>Welcome {{user.name}}</h2>
+    <div class="table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Song Title</th>
+                    <th>Artist</th>
+                    <th>Genre</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for song in songs %}
+        
+                <tr>
+                    <td>{{song.title}}</td>
+                    <td>{{song.artist_name}}</td>
+                    <td>{{song.genre}}</td>
+                    <td class="actions">
+                        <a class="btn btn-play" href="{{ url_for('play_music', song_id=song.id) }}">Play</a>
+                        <a class="btn btn-lyrics" href="{{ url_for('show_lyrics', song_id=song.id) }}">Lyrics</a>
+                        <form action="{{ url_for('songlike', song_id=song.id) }}" method="post">
+                            <button type="submit" class="btn btn-primary">Like</button>
+                        </form>
+                        <form action="{{ url_for('songdislike', song_id=song.id) }}" method="post">
+                            <button  type="submit" class="btn btn-primary">Dislike</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a class="btn btn-open" style="color: #0e0e0a; font-weight: bold;" href="{{url_for('playlists')}}">View Playlist</a>
+    <a class="btn btn-open" style="color: #141410; font-weight: bold;" href="{{url_for('create_playlist')}}">Make Playlist</a>
+
+    <a style="color: #131413; text-align: center; font-weight: bold; " href="{{ url_for('make_creator', user_id=user.u_id) }}">Register as a Creator</a>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes" style="color: #e74c3c; border-width: 50px;">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</html>

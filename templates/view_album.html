@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ album.title }} Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e78080;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h2 {
+            color: #3498db;
+        }
+
+        p {
+            color: #3f230d;
+        }
+
+        h3 {
+            color: #e74c3c;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        a {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>{{ album.title }}</h2>
+        <p>Creator: {{ album.c_name }}</p>
+        <h3>Songs:</h3>
+        <ul>
+            {% for song in songs %}
+            <li>{{ song.title }} - {{ song.artist_name }} <a href="{{ url_for('play_music', song_id=song.id) }}">Play</a></li>
+            {% endfor %}
+        </ul>
+        <a class="btn btn-primary" href="{{ url_for('view_albums') }}">GO Back</a>
+   
+    </div>
+</body>
+
+</html>

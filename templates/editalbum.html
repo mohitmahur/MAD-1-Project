@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Your Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: gray;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form {
+            max-width: 400px;
+            width: 100%;
+            background-color: #197c9b;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .form-control {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        h3 {
+            color: #e1e4e4;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: antiquewhite;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <form method="post" class="form">
+            <h3>Edit Album Details</h3>
+            <label for="title" class="form-label">Title:
+                <input type="text" name="title" id="title" class="form-control" required />
+            </label>
+            <label for="c_name" class="form-label">Creator Name:
+                <input type="text" name="c_name" id="c_name" class="form-control" required />
+            </label>
+            <input type="submit" value="Save" class="btn btn-success">
+        </form>
+        <a class="btn btn-primary" href="{{ url_for('view_albums') }}">GO Back</a>
+    </div>
+
+</body>
+
+</html>

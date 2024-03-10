@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #28a745;
+            margin-top: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            background-color: #c99b9b;
+            border: 5px solid #96b3d1;
+            border-radius: 20px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Results</h1>
+
+    {% if input_type == 'song' %}
+        <h2>Songs</h2>
+        <ul>
+            {% for song in songs %}
+                <li>{{ song.title }}</li>
+                <a class="btn btn-primary" href="{{ url_for('play_music', song_id=song.id) }}">Play</a>
+              
+            {% endfor %}
+        </ul>
+    {% elif input_type == 'album' %}
+        <h2>Albums</h2>
+        <ul>
+            {% for album in albums %}
+                <li>{{ album.title }}</li>
+                <a href="{{ url_for('view_album', album_id=album.id) }}" class="btn btn-primary">View Album</a>
+                      
+            {% endfor %}
+        </ul>
+    {% elif input_type == 'playlist' %}
+        <h2>Playlists</h2>
+        <ul>
+            {% for playlist in playlists %}
+                <li>{{ playlist.name }}</li>
+                <a href="{{ url_for('view_playlist', playlist_id=playlist.id) }}" class="btn btn-primary">View Playlist</a>
+
+            {% endfor %}
+        </ul>
+    {% elif input_type == 'genre' %}
+        <h2>Genres</h2>
+        <ul>
+            {% for genre in genres %}
+                <li>{{ genre.genre }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

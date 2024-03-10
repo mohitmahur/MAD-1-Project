@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #1d5184;
+            color: rgb(196, 34, 34);
+            text-align: center;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: #34495e;
+            overflow: hidden;
+        }
+
+        nav a {
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #2c3e50;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: grey;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1, h2, h3, h4 {
+            color: #171a0f;
+        }
+
+        .flash-messages {
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+            background-color: #f2dede;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">MelodyMingle</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="play">Music</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <h1 style="border: 20px; font-weight: bold;">Admin Dashboard</h1>
+    </header>
+
+    <div class="content">
+        <h1>Total Users</h1>
+        <p>{{ all_users }}</p>
+
+        <h2>Total Creators</h2>
+        <p>{{ all_creators }}</p>
+
+        <h3>Total Songs</h3>
+        <p>{{ all_songs }}</p>
+
+        <h4>Total Albums</h4>
+        <p>{{ all_albums }}</p>
+
+        <h4>Total Playlist</h4>
+        <p>{{ all_playlist }}</p>
+        <h4>All Black creators</h4>
+        <a href="{{url_for('creators_black')}}" class="btn btn-primary"> ALL Black creators</a>
+
+        <h4>All White creators</h4>
+        <a href="{{url_for('creators_white')}}" class="btn btn-primary"> ALL White creators</a>
+
+        <h4>All Albums </h4>
+        <a  href="{{ url_for('view_albums', user_id=user.u_id) }}" class="btn btn-primary">View Album</a>
+        <h4>All Playlist</h4>
+        <a href="{{ url_for('playlists' ) }}" class="btn btn-primary">View Playlist</a>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="flash-messages">
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
